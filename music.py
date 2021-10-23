@@ -11,13 +11,19 @@ from pygame import mixer
 root = tk.ThemedTk()
 root.get_themes()                 // Returns a list of all themes that can be set
 root.set_theme("radiance")        // Sets an available theme
+
+
 // Fonts - Arial (corresponds to Helvetica), Courier New (Courier), Comic Sans MS, Fixedsys,
 // MS Sans Serif, MS Serif, Symbol, System, Times New Roman (Times), and Verdana
 //
 // Styles - normal, bold, roman, italic, underline, and overstrike.
+
+
 statusbar = ttk.Label(root, text="Welcome to Melody", relief=SUNKEN, anchor=W, font='Times 10 italic')
 statusbar.pack(side=BOTTOM, fill=X)
+
 // Create the menubar
+
 menubar = Menu(root)
 root.config(menu=menubar)
 // Create the submenu
