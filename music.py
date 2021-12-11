@@ -9,29 +9,32 @@ from ttkthemes import themed_tk as tk
 from mutagen.mp3 import MP3
 from pygame import mixer
 root = tk.ThemedTk()
-root.get_themes()                 // Returns a list of all themes that can be set
-root.set_theme("radiance")        // Sets an available theme
+root.get_themes()                 #Returns a list of all themes that can be set
+root.set_theme("radiance")        #Sets an available theme
 
 
-// Fonts - Arial (corresponds to Helvetica), Courier New (Courier), Comic Sans MS, Fixedsys,
-// MS Sans Serif, MS Serif, Symbol, System, Times New Roman (Times), and Verdana
-//
-// Styles - normal, bold, roman, italic, underline, and overstrike.
+# Fonts - Arial (corresponds to Helvetica), Courier New (Courier), Comic Sans MS, Fixedsys,
+# MS Sans Serif, MS Serif, Symbol, System, Times New Roman (Times), and Verdana
+# Styles - normal, bold, roman, italic, underline, and overstrike.
 
 
 statusbar = ttk.Label(root, text="Welcome to Melody", relief=SUNKEN, anchor=W, font='Times 10 italic')
 statusbar.pack(side=BOTTOM, fill=X)
 
-// Create the menubar
+# Create the menubar
 
 menubar = Menu(root)
 root.config(menu=menubar)
-// Create the submenu
+
+# Create the submenu
+
 subMenu = Menu(menubar, tearoff=0)
 playlist = []
-// playlist - contains the full path + filename
-// playlistbox - contains just the filename
-// Fullpath + filename is required to play the music inside play_music load function
+
+# playlist - contains the full path + filename
+# playlistbox - contains just the filename
+# Fullpath + filename is required to play the music inside play_music load function
+
 def browse_file():
     global filename_path
     filename_path = filedialog.askopenfilename()
@@ -51,12 +54,14 @@ def about_us():
 subMenu = Menu(menubar, tearoff=0)
 menubar.add_cascade(label="Help", menu=subMenu)
 subMenu.add_command(label="About Us", command=about_us)
-mixer.init()  // initializing the mixer
+mixer.init()  # initializing the mixer
 root.title("Melody")
 root.iconbitmap(r'images/melody.ico')
-// Root Window - StatusBar, LeftFrame, RightFrame
-// LeftFrame - The listbox (playlist)
-// RightFrame - TopFrame,MiddleFrame and the BottomFrame
+
+# Root Window - StatusBar, LeftFrame, RightFrame
+# LeftFrame - The listbox (playlist)
+# RightFrame - TopFrame,MiddleFrame and the BottomFrame
+
 leftframe = Frame(root)
 leftframe.pack(side=LEFT, padx=30, pady=30)
 playlistbox = Listbox(leftframe)
@@ -86,7 +91,7 @@ def show_details(play_song):
     else:
         a = mixer.Sound(play_song)
         total_length = a.get_length()
-    // div - total_length/60, mod - total_length % 60
+    # div - total_length/60, mod - total_length % 60
     mins, secs = divmod(total_length, 60)
     mins = round(mins)
     secs = round(secs)
@@ -96,8 +101,8 @@ def show_details(play_song):
     t1.start()
 def start_count(t):
     global paused
-    // mixer.music.get_busy(): - Returns FALSE when we press the stop button (music stop playing)
-    // Continue - Ignores all of the statements below it. We check if music is paused or not.
+    # mixer.music.get_busy(): - Returns FALSE when we press the stop button (music stop playing)
+    # Continue - Ignores all of the statements below it. We check if music is paused or not.
     current_time = 0
     while current_time <= t and mixer.music.get_busy():
         if paused:
@@ -144,16 +149,16 @@ def rewind_music():
 def set_vol(val):
     volume = float(val) / 100
     mixer.music.set_volume(volume)
-    // set_volume of mixer takes value only from 0 to 1. Example - 0, 0.1,0.55,0.54.0.99,1
+    # Set_volume of mixer takes value only from 0 to 1. Example - 0, 0.1,0.55,0.54.0.99,1
 muted = FALSE
 def mute_music():
     global muted
-    if muted:  // Unmute the music
+    if muted:  # Unmute the music
         mixer.music.set_volume(0.7)
         volumeBtn.configure(image=volumePhoto)
         scale.set(70)
         muted = FALSE
-    else:  // mute the music
+    else:  # mute the music
         mixer.music.set_volume(0)
         volumeBtn.configure(image=mutePhoto)
         scale.set(0)
@@ -169,7 +174,7 @@ stopBtn.grid(row=0, column=1, padx=10)
 pausePhoto = PhotoImage(file='images/pause.png')
 pauseBtn = ttk.Button(middleframe, image=pausePhoto, command=pause_music)
 pauseBtn.grid(row=0, column=2, padx=10)
-// Bottom Frame for volume, rewind, mute etc.
+# Bottom Frame for volume, rewind, mute etc.
 bottomframe = Frame(rightframe)
 bottomframe.pack()
 rewindPhoto = PhotoImage(file='images/rewind.png')
